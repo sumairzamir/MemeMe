@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  MemeMe
 //
-//  Created by Aiman Nabeel on 06/02/2020.
+//  Created by Sumair Zamir on 06/02/2020.
 //  Copyright © 2020 Sumair Zamir. All rights reserved.
 //
 

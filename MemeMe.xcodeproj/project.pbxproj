@@ -13,6 +13,7 @@
 		8830F50623EC73F9008DF41F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8830F50423EC73F9008DF41F /* Main.storyboard */; };
 		8830F50823EC73FD008DF41F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8830F50723EC73FD008DF41F /* Assets.xcassets */; };
 		8830F50B23EC73FD008DF41F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8830F50923EC73FD008DF41F /* LaunchScreen.storyboard */; };
+		8867A66123FDFA20009B9F9F /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867A66023FDFA20009B9F9F /* TextFieldDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		8830F50723EC73FD008DF41F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8830F50A23EC73FD008DF41F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8830F50C23EC73FD008DF41F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8867A66023FDFA20009B9F9F /* TextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +61,21 @@
 				8830F4FE23EC73F9008DF41F /* AppDelegate.swift */,
 				8830F50023EC73F9008DF41F /* SceneDelegate.swift */,
 				8830F50223EC73F9008DF41F /* ViewController.swift */,
+				88E5D42A23FDF85800BE640E /* Delegates */,
 				8830F50423EC73F9008DF41F /* Main.storyboard */,
 				8830F50723EC73FD008DF41F /* Assets.xcassets */,
 				8830F50923EC73FD008DF41F /* LaunchScreen.storyboard */,
 				8830F50C23EC73FD008DF41F /* Info.plist */,
 			);
 			path = MemeMe;
+			sourceTree = "<group>";
+		};
+		88E5D42A23FDF85800BE640E /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				8867A66023FDFA20009B9F9F /* TextFieldDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +151,7 @@
 			files = (
 				8830F50323EC73F9008DF41F /* ViewController.swift in Sources */,
 				8830F4FF23EC73F9008DF41F /* AppDelegate.swift in Sources */,
+				8867A66123FDFA20009B9F9F /* TextFieldDelegate.swift in Sources */,
 				8830F50123EC73F9008DF41F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

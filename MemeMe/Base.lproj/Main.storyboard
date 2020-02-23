@@ -18,8 +18,24 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eau-4K-k6H" userLabel="Stack View 1">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDz-HZ-uA0">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="530"/>
+                                        <items>
+                                            <barButtonItem image="square.and.arrow.up" catalog="system" id="Pwi-ZR-pJI">
+                                                <connections>
+                                                    <action selector="shareImageWith_sender:" destination="BYZ-38-t0r" id="biz-ZG-hZQ"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="tuZ-0O-dLC"/>
+                                            <barButtonItem title="Cancel" id="XSE-Ap-6bn">
+                                                <connections>
+                                                    <action selector="cancelImageWith_sender:" destination="BYZ-38-t0r" id="S4s-pn-jWZ"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Deo-HP-39o">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                        <rect key="frame" x="0.0" y="530" width="414" height="244"/>
                                     </imageView>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WC1-gI-gTH">
                                         <rect key="frame" x="0.0" y="774" width="414" height="44"/>
@@ -27,12 +43,13 @@
                                             <constraint firstAttribute="height" constant="44" id="DW4-et-c2Y"/>
                                         </constraints>
                                         <items>
-                                            <barButtonItem title="Camera" id="4pR-da-com" userLabel="Camera button">
+                                            <barButtonItem title="Camera" image="camera" catalog="system" id="4pR-da-com" userLabel="Camera button">
                                                 <connections>
                                                     <action selector="selectCameraImage:" destination="BYZ-38-t0r" id="wBv-ac-oHC"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem title="Album" id="aLh-bu-q06" userLabel="Album button">
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="NJJ-lX-VfB"/>
+                                            <barButtonItem title="Album" image="photo" catalog="system" id="aLh-bu-q06" userLabel="Album button">
                                                 <connections>
                                                     <action selector="selectImage:" destination="BYZ-38-t0r" id="S4e-Zl-wO6"/>
                                                 </connections>
@@ -41,44 +58,89 @@
                                     </toolbar>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="225" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P65-Ai-3Cs" userLabel="Stack View 2">
-                                <rect key="frame" x="0.0" y="323" width="414" height="250"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="200" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P65-Ai-3Cs" userLabel="Stack View 2">
+                                <rect key="frame" x="0.0" y="194" width="414" height="518"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Top" placeholder="Top" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="85g-Eu-wGr">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="18.666666666666668"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Bottom" placeholder="Bottom" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kd8-fS-QSp">
-                                        <rect key="frame" x="0.0" y="231.33333333333337" width="414" height="18.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="499.33333333333337" width="414" height="18.666666666666629"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                     </textField>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="Psw-kT-DXv"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="P65-Ai-3Cs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3IQ-KV-Ufo"/>
+                            <constraint firstItem="P65-Ai-3Cs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="6AQ-4H-CAu"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="P65-Ai-3Cs" secondAttribute="bottom" constant="150" id="8Ip-bB-tOa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="eau-4K-k6H" secondAttribute="bottom" id="ElY-ex-pjH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="P65-Ai-3Cs" secondAttribute="bottom" constant="60" id="LVm-6N-TBx"/>
+                            <constraint firstItem="P65-Ai-3Cs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="X38-q6-6sW"/>
                             <constraint firstAttribute="trailing" secondItem="eau-4K-k6H" secondAttribute="trailing" id="dJ9-NH-ATC"/>
-                            <constraint firstItem="P65-Ai-3Cs" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="evg-P6-knh"/>
+                            <constraint firstItem="P65-Ai-3Cs" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-20" id="evg-P6-knh"/>
+                            <constraint firstItem="P65-Ai-3Cs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="125" id="fan-XS-1HR"/>
+                            <constraint firstItem="eau-4K-k6H" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="kKa-xI-4zN"/>
                             <constraint firstItem="eau-4K-k6H" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="l5z-X9-UPq"/>
+                            <constraint firstItem="P65-Ai-3Cs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="45" id="le6-Nq-mTN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="P65-Ai-3Cs" secondAttribute="trailing" id="mF4-eT-0bw"/>
                             <constraint firstItem="eau-4K-k6H" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="pQJ-5u-QDf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="8Ip-bB-tOa"/>
+                                <exclude reference="LVm-6N-TBx"/>
+                                <exclude reference="kKa-xI-4zN"/>
+                                <exclude reference="6AQ-4H-CAu"/>
+                                <exclude reference="X38-q6-6sW"/>
+                                <exclude reference="fan-XS-1HR"/>
+                                <exclude reference="le6-Nq-mTN"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="kKa-xI-4zN"/>
+                                <exclude reference="evg-P6-knh"/>
+                                <include reference="le6-Nq-mTN"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="LVm-6N-TBx"/>
+                                <include reference="X38-q6-6sW"/>
+                                <exclude reference="evg-P6-knh"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="8Ip-bB-tOa"/>
+                                <include reference="6AQ-4H-CAu"/>
+                                <exclude reference="evg-P6-knh"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="fan-XS-1HR"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="cameraButton" destination="4pR-da-com" id="mfn-XR-H08"/>
+                        <outlet property="cancelButton" destination="XSE-Ap-6bn" id="ftm-Qs-ciS"/>
                         <outlet property="imagePicked" destination="Deo-HP-39o" id="KFO-cs-O1t"/>
+                        <outlet property="shareButton" destination="Pwi-ZR-pJI" id="4LZ-wk-fsV"/>
                         <outlet property="textFieldBottom" destination="kd8-fS-QSp" id="6XW-yR-49Q"/>
                         <outlet property="textFieldTop" destination="85g-Eu-wGr" id="4Wh-JP-XH2"/>
+                        <outlet property="toolbarBottom" destination="WC1-gI-gTH" id="Fhb-az-a8u"/>
+                        <outlet property="toolbarTop" destination="pDz-HZ-uA0" id="sc3-Af-dhz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -86,4 +148,9 @@
             <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera" catalog="system" width="64" height="48"/>
+        <image name="photo" catalog="system" width="64" height="46"/>
+        <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
+    </resources>
 </document>

@@ -4,6 +4,8 @@
 <dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Required for taking pictures for a meme</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Required for saving meme</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Required for selecting pictures for a meme</string>
 	<key>CFBundleDevelopmentRegion</key>
