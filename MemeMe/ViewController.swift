@@ -126,22 +126,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSAttributedString.Key.strokeWidth: -5
     ]
     
-    //MARK: - Struct to save information on each Meme
-    
-    struct memeInformation {
-        
-        var topText: String
-        var bottomText: String
-        var originalImage: UIImage
-        var memedImage: UIImage
-        
-    }
-    
     //MARK: - Function to save the generated Meme
     
     func save() {
         
-        let meme = memeInformation(topText: textFieldTop.text!, bottomText: textFieldBottom.text!, originalImage: imagePicked.image!, memedImage: generateMemedImage())
+        let _ = MemeInfo(topText: textFieldTop.text!, bottomText: textFieldBottom.text!, originalImage: imagePicked.image!, memedImage: generateMemedImage())
         
     }
     
@@ -257,7 +246,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Call a view to save and share the generated Meme
         
         let controller = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil)
+        
         present(controller, animated: true, completion: nil)
+        
+        // Additional code for iPad compatibility
+        
+        if let popOver = controller.popoverPresentationController {
+            popOver.sourceView = self.view
+            popOver.barButtonItem = self.shareButton
+        }
+        
+        // Once activity has been completed - run the save function, which saves into the MemoInfo struct
+        
         controller.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) -> Void in
             if completed == true {
                 self.save()}
