@@ -71,6 +71,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.textFieldTop.delegate = textFieldDelegate
         self.textFieldBottom.delegate = self
         
+//        // Hide default navigation bars
+//        self.navigationController?.setToolbarHidden(true, animated: false)
+//        self.navigationController?.setNavigationBarHidden(true, animated: false)
+//        self.tabBarController?.tabBar.isHidden = true
+        
     }
     
     //MARK: - Keyboard adjustment functions
@@ -130,7 +135,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func save() {
         
-        let _ = MemeInfo(topText: textFieldTop.text!, bottomText: textFieldBottom.text!, originalImage: imagePicked.image!, memedImage: generateMemedImage())
+        let meme = MemeInfo(topText: textFieldTop.text!, bottomText: textFieldBottom.text!, originalImage: imagePicked.image!, memedImage: generateMemedImage())
+        
+        // Add the meme to the memes array in the AppDelegate
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
         
     }
     
@@ -226,6 +236,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let pickImage = UIImagePickerController()
         pickImage.delegate = self
         pickImage.sourceType = .photoLibrary
+        
+        // Modal adjustments
+        pickImage.modalPresentationStyle = .currentContext
         present(pickImage, animated: true, completion: nil)
         
     }
@@ -260,7 +273,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         controller.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) -> Void in
             if completed == true {
-                self.save()}
+                self.save()
+                
+                self.presentingViewController?.dismiss(animated: true, completion: nil)
+            }
             
         }
         
