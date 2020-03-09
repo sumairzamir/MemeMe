@@ -10,22 +10,21 @@ import UIKit
 
 class MemeViewController: UIViewController {
 
-    var memes: MemeInfo!
-//    {
-//        let object = UIApplication.shared.delegate
-//        let appDelegate = object as! AppDelegate
-//        return appDelegate.memes
-//    }
+    var memedImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.memeImage.image = memedImage
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.memeImage!.image = memes.memedImage
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     @IBOutlet weak var memeImage: UIImageView!

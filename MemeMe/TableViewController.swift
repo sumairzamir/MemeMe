@@ -20,6 +20,7 @@ class TableViewController: UITableViewController {
     
     @IBOutlet weak var newMemeButton: UIBarButtonItem!
     
+    
     @IBAction func newMeme() {
         let newMemeController = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
 //        show(newMemeController, sender: self)
@@ -61,24 +62,33 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TableMemeCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         let meme = self.memes[(indexPath as NSIndexPath).row]
         
-        // Set name and image for each row
-        
-        cell.textLabel?.text = "\(meme.topText) \(meme.bottomText)"
-        cell.imageView?.image = meme.memedImage
+        cell.memeTableImage?.image = meme.memedImage
+        cell.memeTableLabel?.text = "\(meme.topText) \(meme.bottomText)"
+//
+//        cell.imageView?.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+//        // Set name and image for each row
+//
+//        cell.textLabel?.text = "\(meme.topText) \(meme.bottomText)"
+//        cell.imageView?.image = meme.memedImage
 
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowsAt indexPath: IndexPath) {
-        
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let memeController = self.storyboard!.instantiateViewController(withIdentifier: "MemeViewController") as! MemeViewController
-        memeController.memes = self.memes[(indexPath as NSIndexPath).row]
+        let meme = self.memes[(indexPath as NSIndexPath).row]
+        memeController.memedImage = meme.memedImage
         self.navigationController!.pushViewController(memeController, animated: true)
-        
     }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowsAt indexPath: IndexPath) {
+        
+        
+   
+//    }
     
     /*
     // Override to support conditional editing of the table view.
