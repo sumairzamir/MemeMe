@@ -8,95 +8,114 @@
 
 import UIKit
 
+// Define the re-use identified for the CollectionView
+
 private let reuseIdentifier = "Cell"
 
 class CollectionViewController: UICollectionViewController {
-
+    
+    // MARK: - IBOutlets
+    
+    @IBOutlet weak var newMemeButton: UIBarButtonItem!
+    
+    // Reference to the Flow Layout from storyboard
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    
+    // MARK: - Define properties (AppDelegate)
+    
+    // Reference to the MemeInfo struct which sits in the AppDelegate
+    
     var memes: [MemeInfo]! {
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
+        
     }
     
-    @IBOutlet weak var newMemeButton: UIBarButtonItem!
+    // MARK: IBActions
+    
+    // Method called when the newMemeButton is pressed
+    
+    @IBAction func newMeme() {
+        
+        // Define view controller
+        let newMemeController = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+        
+        // Present the view controller modally
+        newMemeController.modalPresentationStyle = .currentContext
+        newMemeController.view.backgroundColor = UIColor.black
+        present(newMemeController, animated: true, completion: nil)
+        
+        
+        // Hide the tab bar. This conforms to Apple's design standards
+        self.tabBarController?.tabBar.isHidden = true
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        // Reload the data in the view controller
         self.collectionView!.reloadData()
+        
+        // Ensure the tab bar is shown in the view controller
         self.tabBarController!.tabBar.isHidden = false
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        
+        // MARK: - Flow Layout definitions
+        
+        let space:CGFloat = 5
+        let width = (view.frame.size.width - (2 * space))/3
+        let height = (view.frame.size.height - (2 * space))/5
+        
+        // Spacing between items
+        self.flowLayout.minimumInteritemSpacing = space
+        
+        // Spacing between rows
+        self.flowLayout.minimumLineSpacing = space
+        
+        // Size for each cell/item
+        self.flowLayout.itemSize = CGSize(width: width, height: height)
+        
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
+        
+        // Defines the number of items in the collectionView
         return self.memes.count
+        
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
+        
+        // Define a cell/row for each element of the collection. Properties as defined in the CollectionViewCell class
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
+        
+        // Refer to each meme item within the struct as a separate cell/row
+        let meme = self.memes[(indexPath as NSIndexPath).row]
+        
+        // Define the image reference of the meme item
+        cell.memeCellImage?.image = meme.memedImage
+        
         return cell
+        
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        // On selection, open a detailed view of the meme item
+        let memeController = self.storyboard!.instantiateViewController(withIdentifier: "MemeViewController") as! MemeViewController
+        let meme = self.memes[(indexPath as NSIndexPath).row]
+        
+        // Pass through of the meme item to the detailed view (MemeViewController)
+        memeController.memedImage = meme.memedImage
+        
+        // Push the detailed view
+        self.navigationController!.pushViewController(memeController, animated: true)
+        
     }
-    */
-
+    
 }

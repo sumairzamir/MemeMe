@@ -2,7 +2,7 @@
 //  MemeInfo.swift
 //  MemeMe
 //
-//  Created by Aiman Nabeel on 23/02/2020.
+//  Created by Sumair Zamir on 23/02/2020.
 //  Copyright © 2020 Sumair Zamir. All rights reserved.
 //
 

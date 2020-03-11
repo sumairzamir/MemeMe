@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-    //MARK: - IBOutlets
+    // MARK: - IBOutlets
     
     @IBOutlet weak var imagePicked: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -20,12 +20,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var toolbarTop: UIToolbar!
     @IBOutlet weak var toolbarBottom: UIToolbar!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
-    //MARK: - Delegate definition
+    // MARK: - Delegate definition
     
     let textFieldDelegate = TextFieldDelegate()
     
-    //MARK: - ViewController functions
+    // MARK: - ViewController functions
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -71,14 +72,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.textFieldTop.delegate = textFieldDelegate
         self.textFieldBottom.delegate = self
         
-//        // Hide default navigation bars
-//        self.navigationController?.setToolbarHidden(true, animated: false)
-//        self.navigationController?.setNavigationBarHidden(true, animated: false)
-//        self.tabBarController?.tabBar.isHidden = true
-        
     }
     
-    //MARK: - Keyboard adjustment functions
+    // MARK: - Keyboard adjustment functions
     
     func subscribeToKeyboardNotifications() {
         
@@ -122,7 +118,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
-    //MARK: - Attributes for the UITextfields
+    // MARK: - Attributes for the UITextfields
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
@@ -131,20 +127,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSAttributedString.Key.strokeWidth: -5
     ]
     
-    //MARK: - Function to save the generated Meme
+    // MARK: - Function to save the generated Meme
     
     func save() {
         
         let meme = MemeInfo(topText: textFieldTop.text!, bottomText: textFieldBottom.text!, originalImage: imagePicked.image!, memedImage: generateMemedImage())
         
-        // Add the meme to the memes array in the AppDelegate
+        // Add the meme to the instance of the memes array in the AppDelegate
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         appDelegate.memes.append(meme)
         
     }
     
-    //MARK: - Function to take a screenshot and hide Toolbars/Navbars
+    // MARK: - Function to take a screenshot and hide Toolbars/Navbars
     
     func generateMemedImage() -> UIImage {
         
@@ -179,7 +175,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
-    //MARK: - Configure the share/cancel buttons
+    // MARK: - Configure the share/cancel buttons
     
     func configureUI(_ imageSelected:Bool = false) {
         
@@ -188,7 +184,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
-    //MARK: - Self delegates for the bottom UITextField
+    // MARK: - Self delegates for the bottom UITextField
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
@@ -207,7 +203,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
-    //MARK: - Image selection function
+    // MARK: - Image selection function
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         dismiss(animated: true, completion: nil)
@@ -227,7 +223,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
-    //MARK: IBAction functions
+    // MARK: IBActions
     
     @IBAction func selectImage(_ sender: Any) {
         
@@ -275,7 +271,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             if completed == true {
                 self.save()
                 
+                // One the save method has been called, dismiss the modal view presentation of the MemeViewController. The presentation of the UIActivityViewController is automatically dismissed on completion.
                 self.presentingViewController?.dismiss(animated: true, completion: nil)
+                
             }
             
         }
@@ -288,6 +286,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.imagePicked.image = nil
         configureUI(false)
         
+    }
+    
+    @IBAction func dismissViewController(_sender: Any) {
+        self.presentingViewController?.dismiss(animated: (true), completion: nil)
     }
     
 }

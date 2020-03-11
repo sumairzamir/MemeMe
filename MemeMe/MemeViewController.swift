@@ -9,35 +9,37 @@
 import UIKit
 
 class MemeViewController: UIViewController {
-
+    
+    // MARK: - IBOutlets
+    
+    @IBOutlet weak var memeImage: UIImageView!
+    
+    // MARK: - Define properties
+    
+    // Define a property of the image which is passed through from Table/Collection View Controllers
     var memedImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Present the image selected
         self.memeImage.image = memedImage
-        // Do any additional setup after loading the view.
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Hide the tab bar. While the MemeViewController is pushed, for the purposes of this app, hiding the tab bar is appropriate.
         self.tabBarController?.tabBar.isHidden = true
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        
+        // Show the tab bar.
         self.tabBarController?.tabBar.isHidden = false
+        
     }
     
-    @IBOutlet weak var memeImage: UIImageView!
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
