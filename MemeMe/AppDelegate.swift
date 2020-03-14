@@ -10,7 +10,7 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+    // Test comment
     // MARK: - Define an instance of the MemeInfo struct
     // Use the AppDelegate class as Delegate for an instance of the Meme information.
     // This is not where such data is typically held, but has been selected specifically for this app.
