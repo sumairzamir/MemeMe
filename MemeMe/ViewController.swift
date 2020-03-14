@@ -47,30 +47,31 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
+    // MARK: - Common method, initialisation of textFields
+    
+    func initTextField(_ textField: UITextField, text: String, delegate: UITextFieldDelegate) {
+        
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.tintColor = UIColor.clear
+        textField.textAlignment = .center
+        textField.text = text
+        textField.delegate = delegate
+    
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        // UITextfield adjustments as defined by an array
-        textFieldTop.defaultTextAttributes = memeTextAttributes
-        textFieldBottom.defaultTextAttributes = memeTextAttributes
+        // Initialise the top text field
         
-        // Remove the colour of the cursor
-        textFieldTop.tintColor = UIColor.clear
-        textFieldBottom.tintColor = UIColor.clear
+        initTextField(textFieldTop, text: "Top", delegate: textFieldDelegate)
         
-        // Default settings for the UITextfields
-        textFieldTop.text = "Top"
-        textFieldTop.textAlignment = .center
-        textFieldBottom.text = "Bottom"
-        textFieldBottom.textAlignment = .center
+        // Initialise the bottom text field
+        initTextField(textFieldBottom, text: "Bottom", delegate: self)
         
-        // Configuration of the toolbar buttons
+        // Configure the UI elements on initial loading of the view
         configureUI(false)
-        
-        // Delegate definition
-        self.textFieldTop.delegate = textFieldDelegate
-        self.textFieldBottom.delegate = self
         
     }
     
@@ -140,19 +141,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
-    // MARK: - Function to take a screenshot and hide Toolbars/Navbars
-    
-    func generateMemedImage() -> UIImage {
+    func configureForScreenshot(takeScreenshot: Bool) {
         
         // Hide the navbar and toolbars
         
         // Built-in navbar and toolbars
-        self.navigationController?.setToolbarHidden(true, animated: false)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        self.navigationController?.setToolbarHidden(takeScreenshot, animated: false)
+        self.navigationController?.setNavigationBarHidden(takeScreenshot, animated: false)
         
         // Created toolbars at the top and bottom
-        self.toolbarTop.isHidden = true
-        self.toolbarBottom.isHidden = true
+        
+        self.toolbarTop.isHidden = takeScreenshot
+        self.toolbarBottom.isHidden = takeScreenshot
+    }
+    
+    
+    // MARK: - Function to take a screenshot and hide Toolbars/Navbars
+    
+    func generateMemedImage() -> UIImage {
+        
+        // Configure UI for screenshot
+        
+        configureForScreenshot(takeScreenshot: true)
         
         // Save the screenshot as an image
         
@@ -161,13 +172,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        // Show the navbar and toolbars
+        // Re-configure once the screenshot has been taken
         
-        self.navigationController?.setToolbarHidden(false, animated: false)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        
-        self.toolbarTop.isHidden = false
-        self.toolbarBottom.isHidden = false
+        configureForScreenshot(takeScreenshot: false)
         
         // Return a memedImage
         
@@ -223,30 +230,34 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
+    // MARK: - Select source, common method - code refactoring
+    
+    func sourceSelect(_ source: UIImagePickerController.SourceType) {
+        
+        let select = UIImagePickerController()
+        select.delegate = self
+        select.sourceType = source
+        
+        select.modalPresentationStyle = .currentContext
+        present(select, animated: true, completion: nil)
+        
+    }
+    
     // MARK: IBActions
     
     @IBAction func selectImage(_ sender: Any) {
         
-        // Select an image after pressing the image button
+        // Call the common method
         
-        let pickImage = UIImagePickerController()
-        pickImage.delegate = self
-        pickImage.sourceType = .photoLibrary
-        
-        // Modal adjustments
-        pickImage.modalPresentationStyle = .currentContext
-        present(pickImage, animated: true, completion: nil)
+        sourceSelect(.photoLibrary)
         
     }
     
     @IBAction func selectCameraImage(_ sender: Any) {
         
-        // Select an image after taking a photo from the camera
+        // Call the common method
         
-        let pickCameraImage = UIImagePickerController()
-        pickCameraImage.delegate = self
-        pickCameraImage.sourceType = .camera
-        present(pickCameraImage, animated: true, completion: nil)
+        sourceSelect(.camera)
         
     }
     

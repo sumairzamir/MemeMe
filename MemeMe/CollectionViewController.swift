@@ -8,7 +8,7 @@
 
 import UIKit
 
-// Define the re-use identified for the CollectionView
+// Define the re-use identifier for the CollectionView
 
 private let reuseIdentifier = "Cell"
 
